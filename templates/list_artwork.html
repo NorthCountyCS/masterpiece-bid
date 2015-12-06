@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Listing
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% for item in items %}
+        <a href="{% url 'view_artwork' item.id %}"><h1>{{ item.name }} <img src="{{ item.image }}"></h1></a>
+        <br>
+    {% endfor %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

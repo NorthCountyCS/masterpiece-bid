@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ item.name }}
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+    <h1>{{ item.name }}</h1>
+    <img src="{{ item.image }}" alt="Picture"/>
+    <p>
+        <form method="post" action="{% url 'view_artwork' item_id %}">
+            {% csrf_token %}
+            <input type="text" name="email" placeholder="Email"/>
+            $<input type="text" name="amount" placeholder="0.00"/>
+            <input type="submit" value="Bid"/>
+        </form>
+    </p>
+    <hr/>
+    <p>
+        Started: {{ item.pub_date }}<br/>
+        Ends: {{ item.end_date }}
+    </p>
+    <hr/>
+    <p>
+        {% for bidder in bidders %}
+            {{ bidder }} bidded ${{ bidder.amount }}<br>
+        {% endfor %}
+    </p>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
