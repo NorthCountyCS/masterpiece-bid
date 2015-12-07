@@ -13,7 +13,7 @@ class Artwork(models.Model):
 class Bid(models.Model):
     artwork = models.ForeignKey(Artwork)
     email = models.EmailField()
-    amount = models.DecimalField(max_digits=6s, decimal_places=2)
+    amount = models.DecimalField(max_digits=6, decimal_places=2)
     bid_date = models.DateField('bid date', auto_now_add=True)
 
     def __str__(self):
