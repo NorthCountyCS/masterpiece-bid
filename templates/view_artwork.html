@@ -12,12 +12,14 @@
     <h1>{{ item.name }}</h1>
     <img src="{{ item.image }}" alt="Picture"/>
     <p>
-        <form method="post" action="{% url 'view_artwork' item_id %}">
+        <form name="bid" onsubmit="return validate()" method="post" action="{% url 'view_artwork' item_id %}">
             {% csrf_token %}
             <input type="text" name="email" placeholder="Email"/>
             $<input type="text" name="amount" placeholder="0.00"/>
             <input type="submit" value="Bid"/>
         </form>
+        <p id="validation">
+        </p>
     </p>
     <hr/>
     <p>
@@ -33,5 +35,5 @@
 {% endblock %}
 
 {% block js %}
-
+    <!--Data validation here or views.py?-->
 {% endblock %}

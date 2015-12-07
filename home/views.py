@@ -1,16 +1,27 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Artwork, Bid
+from django.db.models import Max
 
 # Create your views here.
 def list_artwork(request):
     context = dict()
-    context['items'] = Artwork.objects.all()
+
+    #Get max bid amount of each art
+    bids = []
+    for art in Artwork.objects.all():
+        bids.append(art.bid_set.all().aggregate(Max('amount'))['amount__max'])
+
+    context['pkg'] = zip(Artwork.objects.all(), bids)
     return render(request, 'list_artwork.html', context)
 
 # includes bidding
 def view_artwork(request, item_id):
     if request.method == 'POST':
+
+        #Data validation
+        pass
+
         bid = Bid(artwork=Artwork.objects.get(id=item_id), email=request.POST['email'], amount=request.POST['amount'])
         bid.save()
         return redirect('view_artwork', item_id)
