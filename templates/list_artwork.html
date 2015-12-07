@@ -13,7 +13,7 @@
     {% for art, bid in pkg %}
         <a href="{% url 'view_artwork' art.id %}"><h1>{{ art.name }} </h1></a>
         <p>Highest bid: {{ bid }}</p>
-        <img src="{{art.image}}">
+        <img src="{{ art.image }}">
         <br>
     {% endfor %}
 

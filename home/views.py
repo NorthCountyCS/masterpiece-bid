@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Artwork, Bid
 from django.db.models import Max
@@ -9,10 +8,11 @@ def list_artwork(request):
 
     #Get max bid amount of each art
     bids = []
-    for art in Artwork.objects.all():
+    artwork = Artwork.objects.all()
+    for art in artwork:
         bids.append(art.bid_set.all().aggregate(Max('amount'))['amount__max'])
 
-    context['pkg'] = zip(Artwork.objects.all(), bids)
+    context['pkg'] = zip(artwork, bids)
     return render(request, 'list_artwork.html', context)
 
 # includes bidding

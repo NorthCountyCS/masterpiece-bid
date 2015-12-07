@@ -4,6 +4,7 @@ from django.db import models
 class Artwork(models.Model):
     name = models.CharField(max_length=32)
     image = models.ImageField(upload_to='images')
+    original_image = models.ImageField(upload_to='images') # poopoo
     pub_date = models.DateField('date published', auto_now_add=True)
     end_date = models.DateField('date ends')
 
