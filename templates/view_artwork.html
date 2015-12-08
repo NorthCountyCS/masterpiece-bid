@@ -4,16 +4,23 @@
     {{ item.name }}
 {% endblock %}
 
-{% block css %}
-
-{% endblock %}
-
 {% block content %}
-    <h1>{{ item.name }}</h1>
-    <img src="{{ item.image }}" alt="Picture"/>
-    <p>
+    <div class="container-fluid">
+      <h1>{{ item.name }}</h1>
+      <table>
+        <tr>
+          <td>
+            <img src="{{ item.image }}" alt="Picture"/ height="200" width="200">
+          </td>
+          <td>
+            <img src="{{ item.original_image }}" alt="Picture"/ height="200" width="200">
+          </td>
+        </tr>
+      </table>
+      <p>
         <form name="bid" onsubmit="return validate()" method="post" action="{% url 'view_artwork' item_id %}">
             {% csrf_token %}
+            <input type="text" name="name" placeholder="Name"/>
             <input type="text" name="email" placeholder="Email"/>
             $<input type="text" name="amount" placeholder="0.00"/>
             <input type="submit" value="Bid"/>
@@ -21,20 +28,17 @@
         <p id="validation">
             {{ error_message }}
         </p>
-    </p>
-    <hr/>
-    <p>
-        Started: {{ item.pub_date }}<br/>
-        Ends: {{ item.end_date }}
-    </p>
-    <hr/>
-    <p>
-        {% for bidder in bidders %}
-            {{ bidder }} bidded ${{ bidder.amount }}<br>
-        {% endfor %}
-    </p>
-{% endblock %}
-
-{% block js %}
-    <!--Data validation here or views.py?-->
+      </p>
+      <hr/>
+      <p>
+          Started: {{ item.pub_date }}<br/>
+          Ends: {{ item.end_date }}
+      </p>
+      <hr/>
+      <p>
+          {% for bidder in bidders %}
+              {{ bidder }} bidded ${{ bidder.amount }}<br>
+          {% endfor %}
+      </p>
+    </div>
 {% endblock %}

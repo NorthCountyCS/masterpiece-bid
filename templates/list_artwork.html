@@ -4,22 +4,24 @@
     Listing
 {% endblock %}
 
-{% block css %}
-
-{% endblock %}
-
 {% block content %}
 
     {% for art, bid in pkg %}
+    <div class="container-fluid">
         <a href="{% url 'view_artwork' art.id %}"><h1>{{ art.name }} </h1></a>
-        <p>Highest bid: {{ bid }}</p>
-        <img src="{{ art.image }}">
-        <img src="{{ art.original_image }}">
+        <p>{{ bid }}</p>
+        <table>
+          <tr>
+            <td>
+              <img src="{{ art.image }}" alt="Student-Art" class="img-responsive" height="200" width="200">
+            </td>
+            <td>
+              <img src="{{ art.original_image }}" alt="Original-Art" class="img-responsive" height="200" width="200">
+            </td>
+        </tr>
+        </table>
+      </div>
         <br>
     {% endfor %}
-
-{% endblock %}
-
-{% block js %}
 
 {% endblock %}

@@ -11,7 +11,11 @@ def list_artwork(request):
     bids = []
     artwork = Artwork.objects.all()
     for art in artwork:
-        bids.append(art.bid_set.all().aggregate(Max('amount'))['amount__max'])
+        max_bid = art.bid_set.all().aggregate(Max('amount'))['amount__max']
+        if not max_bid == None:
+            bids.append('Highest bid: $'+str(max_bid))
+        else:
+            bids.append('There are no bids at this time.')
 
     context['pkg'] = zip(artwork, bids)
     return render(request, 'list_artwork.html', context)
@@ -26,16 +30,20 @@ def view_artwork(request, item_id):
 
     if request.method == 'POST':
 
+        name = request.POST['name']
         email = request.POST['email']
         amount = request.POST['amount']
+        valid = validation.validate(name, email, amount, context['item'])
 
-        if validation.validate(email,amount):
-            bid = Bid(artwork=Artwork.objects.get(id=item_id), email=email, amount=amount)
+        if valid == 0:
+            bid = Bid(artwork=Artwork.objects.get(id=item_id), name=name, email=email, amount=amount)
             bid.save()
             return redirect('view_artwork', item_id)
+        elif valid == 1:
+            context['error_message'] = 'Your bid must be at least $1 greater than the current bid'
+            return render(request, 'view_artwork.html', context)
         else:
-            context['error_message'] = 'That dun work'
+            context['error_message'] = 'You have entered an invalid entry. Please make sure that all fields are filled appropriately'
             return render(request, 'view_artwork.html', context)
 
     return render(request, 'view_artwork.html', context)
-
