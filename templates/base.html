@@ -1,13 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Masterpiece &middot;{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
     {% block css %}{% endblock %}
 </head>
 <body>
     {% block content %}{% endblock %}
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% block js %}{% endblock %}
 </body>
 </html>
