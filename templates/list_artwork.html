@@ -6,39 +6,27 @@
 {% endblock %}
 
 {% block css %}
+    .hide-top {
+        margin-top: -5px;
+    }
 
+    .row img {
+        width: 100%;
+    }
 {% endblock %}
 
 {% block content %}
 
     <div class="container">
-{#        {% for art, bid in pkg %}#}
-{#            <div class="container-fluid">#}
-{#                <a href="{% url 'view_artwork' art.id %}"><h1>{{ art.name }} </h1></a>#}
-{#                <p>{{ bid }}</p>#}
-{#                <table>#}
-{#                  <tr>#}
-{#                    <td>#}
-{#                      <img src="{{ art.image }}" alt="Student-Art" class="img-responsive" height="200" width="200">#}
-{#                    </td>#}
-{#                    <td>#}
-{#                      <img src="{{ art.original_image }}" alt="Original-Art" class="img-responsive" height="200" width="200">#}
-{#                    </td>#}
-{#                </tr>#}
-{#                </table>#}
-{#              </div>#}
-{#            <br>#}
-{#        {% endfor %}#}
 
-        <h1>Listing</h1>
-
+    <h1>Listing</h1>
     {% for art, bid in pkg %}
-        {% if forloop.counter|divisibleby:3 %}
-            <div class="row">
+        {% if forloop.counter|divisibleby:4 or forloop.counter0 == 0 %}
+            <div class="row"><!-- start -->
         {% endif %}
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <div class="row" style="margin-top: -5px;">
+                    <div class="row hide-top">
                         <img src="{{ art.original_image }}" class="img-responsive" />
                         <img src="{{ art.image }}" class="img-responsive" />
                     </div>
@@ -48,8 +36,8 @@
                     </div>
                 </div>
             </div>
-        {% if forloop.counter|divisibleby:3 %}
-            </div>
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+            </div><!-- end -->
         {% endif %}
     {% endfor %}
 
