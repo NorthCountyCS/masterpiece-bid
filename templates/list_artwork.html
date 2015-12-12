@@ -1,27 +1,58 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Listing
 {% endblock %}
 
+{% block css %}
+
+{% endblock %}
+
 {% block content %}
 
+    <div class="container">
+{#        {% for art, bid in pkg %}#}
+{#            <div class="container-fluid">#}
+{#                <a href="{% url 'view_artwork' art.id %}"><h1>{{ art.name }} </h1></a>#}
+{#                <p>{{ bid }}</p>#}
+{#                <table>#}
+{#                  <tr>#}
+{#                    <td>#}
+{#                      <img src="{{ art.image }}" alt="Student-Art" class="img-responsive" height="200" width="200">#}
+{#                    </td>#}
+{#                    <td>#}
+{#                      <img src="{{ art.original_image }}" alt="Original-Art" class="img-responsive" height="200" width="200">#}
+{#                    </td>#}
+{#                </tr>#}
+{#                </table>#}
+{#              </div>#}
+{#            <br>#}
+{#        {% endfor %}#}
+
+        <h1>Listing</h1>
+
     {% for art, bid in pkg %}
-    <div class="container-fluid">
-        <a href="{% url 'view_artwork' art.id %}"><h1>{{ art.name }} </h1></a>
-        <p>{{ bid }}</p>
-        <table>
-          <tr>
-            <td>
-              <img src="{{ art.image }}" alt="Student-Art" class="img-responsive" height="200" width="200">
-            </td>
-            <td>
-              <img src="{{ art.original_image }}" alt="Original-Art" class="img-responsive" height="200" width="200">
-            </td>
-        </tr>
-        </table>
-      </div>
-        <br>
+        {% if forloop.counter|divisibleby:3 %}
+            <div class="row">
+        {% endif %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="row" style="margin-left: 20px">
+                        <img src="{{ art.original_image }}" style="height: 200px;"/>
+                        <img src="{{ art.image }}" style="height: 200px;"/>
+                    </div>
+                    <div class="caption">
+                        <h3>{{ art }}</h3>
+                        <p><a href="{% url 'view_artwork' art.id %}" class="btn btn-primary" role="button">View Artwork</a></p>
+                    </div>
+                </div>
+            </div>
+        {% if forloop.counter|divisibleby:3 %}
+            </div>
+        {% endif %}
     {% endfor %}
+
+    </div>
 
 {% endblock %}

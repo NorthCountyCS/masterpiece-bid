@@ -41,7 +41,7 @@ def view_artwork(request, item_id):
             bid.save()
             return redirect('view_artwork', item_id)
         elif valid == validation.LOW_BID:
-            context['error_message'] = 'Your bid must be at least $1 greater than the highest bid'
+            context['error_message'] = 'Your bid must be at least $1 greater than the current highest bid'
             return render(request, 'view_artwork.html', context)
         elif valid == validation.INVALID:
             context['error_message'] = 'You have entered an invalid entry. Please make sure that all fields are filled appropriately'

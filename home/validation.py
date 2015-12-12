@@ -2,9 +2,9 @@ from django.db.models import Max
 import re
 
 EMAIL_REGEX = re.compile(r'[^@]+@[^@]+\.[^@]+')
-VALID = 0
-LOW_BID = 1
-INVALID = -1
+INVALID = 0
+VALID = 1
+LOW_BID = 2
 
 def is_numberic(n):
     try:

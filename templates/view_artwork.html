@@ -5,15 +5,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container">
       <h1>{{ item.name }}</h1>
       <table>
         <tr>
           <td>
-            <img src="{{ item.image }}" alt="Picture"/ height="200" width="200">
+            <img src="{{ item.image }}" alt="Picture" height="200" width="200">
           </td>
           <td>
-            <img src="{{ item.original_image }}" alt="Picture"/ height="200" width="200">
+            <img src="{{ item.original_image }}" alt="Picture" height="200" width="200">
           </td>
         </tr>
       </table>
@@ -22,7 +22,12 @@
             {% csrf_token %}
             <input type="text" name="name" placeholder="Name"/>
             <input type="text" name="email" placeholder="Email"/>
-            $<input type="text" name="amount" placeholder="0.00"/>
+{#            $<input type="text" name="amount" placeholder="0.00"/>#}
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control" name="amount" placeholder="Amount"/>
+                <div class="input-group-addon">.00</div>
+            </div>
             <input type="submit" value="Bid"/>
         </form>
         <p id="validation">
