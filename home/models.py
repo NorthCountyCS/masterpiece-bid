@@ -6,7 +6,7 @@ class Artwork(models.Model):
     image = models.ImageField(upload_to='static/images')
     original_image = models.ImageField(upload_to='static/images', blank=True)
     pub_date = models.DateField('date published', auto_now_add=True)
-    end_date = models.DateField('date ends')
+    end_date = models.DateField('end date')
 
     def __str__(self):
         return self.name

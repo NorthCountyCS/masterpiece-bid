@@ -16,31 +16,28 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="container">
-
-    <h1>Listing</h1>
-    {% for art, bid in pkg %}
-        {% if forloop.counter|divisibleby:4 or forloop.counter0 == 0 %}
-            <div class="row"><!-- start -->
-        {% endif %}
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <div class="row hide-top">
-                        <img src="{{ art.original_image }}" class="img-responsive" />
-                        <img src="{{ art.image }}" class="img-responsive" />
-                    </div>
-                    <div class="caption">
-                        <h3>{{ art }}</h3>
-                        <p><a href="{% url 'view_artwork' art.id %}" class="btn btn-primary" role="button">View Artwork</a></p>
+        <h1>Listing</h1>
+        {% for art, bid in pkg %}
+            {% if forloop.counter|divisibleby:3 or forloop.counter0 == 0 %}
+                <div class="row"><!-- start -->
+            {% endif %}
+                <div class="col-sm-4 col-md-4">
+                    <div class="thumbnail">
+                        <div class="row hide-top">
+                            <img src="{{ art.original_image }}" class="img-responsive" />
+                            <img src="{{ art.image }}" class="img-responsive" />
+                        </div>
+                        <div class="caption">
+                            <h3>{{ art }}</h3>
+                            <p>{{ bid }}</p>
+                            <p><a href="{% url 'view_artwork' art.id %}" class="btn btn-primary" role="button">View Artwork</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% if forloop.counter|divisibleby:3 or forloop.last %}
-            </div><!-- end -->
-        {% endif %}
-    {% endfor %}
-
+            {% if forloop.counter|divisibleby:3 or forloop.last %}
+                </div><!-- end -->
+            {% endif %}
+        {% endfor %}
     </div>
-
 {% endblock %}

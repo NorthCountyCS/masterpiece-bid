@@ -4,8 +4,8 @@ from .models import Bid, Artwork
 # Register your models here.
 @admin.register(Bid)
 class Bid(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'email', 'artwork', 'amount']
 
 @admin.register(Artwork)
 class Artwork(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'end_date']
