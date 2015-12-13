@@ -5,6 +5,7 @@ EMAIL_REGEX = re.compile(r'[^@]+@[^@]+\.[^@]+')
 INVALID = 0
 VALID = 1
 LOW_BID = 2
+ZERO = 3
 
 def is_numberic(n):
     try:
@@ -14,6 +15,9 @@ def is_numberic(n):
         return False
 
 def validate(name, email, amount, art):
+    if int(amount) == 0:
+        return ZERO
+
     max_bid = art.bid_set.all().aggregate(Max('amount'))['amount__max']
     valid_len = len(amount.split('.')[0]) <= 4
     if len(name) > 0 and EMAIL_REGEX.match(email) and (max_bid == None or is_numberic(amount)) and valid_len:
