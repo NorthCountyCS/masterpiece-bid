@@ -1,59 +1,65 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ item.name }}
+    {{ item }}
 {% endblock %}
 
 {% block css %}
+    .pictures {
+        margin-bottom: 20px;
+    }
 
+    .pictures img {
+        width: 100%;
+    }
 {% endblock %}
 
 {% block content %}
     <div class="container">
-      <h1>{{ item.name }}</h1>
-      <table>
-        <tr>
-          <td>
-            <img src="{{ item.image }}" alt="Picture" height="200" width="200">
-          </td>
-          <td>
-            <img src="{{ item.original_image }}" alt="Picture" height="200" width="200">
-          </td>
-        </tr>
-      </table>
-      <p>
-        <form name="bid" onsubmit="return validate()" method="post" action="{% url 'view_artwork' item_id %}">
+        <h1>{{ item }}</h1>
+
+        <div class="row pictures">
+            <div class="col-sm-6 col-md-6">
+                <img src="{{ item.image }}" alt="Image" class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <img src="{{ item.original_image }}" alt="Original Image" class="img-responsive img-thumbnail">
+            </div>
+        </div>
+
+        <form class="form-inline" name="bid" method="post" action="{% url 'view_artwork' item_id %}">
             {% csrf_token %}
             <div class="form-group">
-                <input type="text" class="form-control" name="name" placeholder="Name"/>
+                <input type="text" class="form-control" name="name" placeholder="Name" required />
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="email" placeholder="Email"/>
+                <input type="email" class="form-control" name="email" placeholder="Email" required />
             </div>
             <div class="input-group">
                 <div class="input-group-addon">$</div>
-                <input type="text" class="form-control" name="amount" placeholder="Amount"/>
+                <input type="number" class="form-control" name="amount" placeholder="Amount" required />
                 <div class="input-group-addon">.00</div>
             </div>
-            <div class="form-group" style="margin-top: 10px;">
+            <div class="form-group">
                 <input type="submit" class="btn btn-success" value="Bid"/>
             </div>
         </form>
-      </p>
-      <hr/>
-      <p>
-          Started: {{ item.pub_date }}<br/>
-          Ends: {{ item.end_date }}
-      </p>
-      <hr/>
-      <p>
-          {% for bidder in bidders %}
-              {{ bidder }} bidded ${{ bidder.amount }}<br>
-          {% endfor %}
-      </p>
+
+        <hr/>
+
+        <p>
+            Started: {{ item.pub_date }}<br/>
+            Ends: {{ item.end_date }}
+        </p>
+        <hr/>
+        <p>
+            {% for bidder in bidders %}
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'admin:home_bid_change' bidder.id %}">{{ bidder }}</a> bidded ${{ bidder.amount }}<br/>
+                {% else %}
+                    {{ bidder }} bidded ${{ bidder.amount }}<br/>
+                {% endif %}
+            {% endfor %}
+        </p>
     </div>
-{% endblock %}
-
-{% block js %}
-
 {% endblock %}
