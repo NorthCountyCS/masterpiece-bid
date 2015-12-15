@@ -6,6 +6,7 @@ INVALID = 0
 VALID = 1
 LOW_BID = 2
 ZERO = 3
+OVER_TEN = 4
 
 def is_numberic(n):
     try:
@@ -17,6 +18,9 @@ def is_numberic(n):
 def validate(name, email, amount, art):
     if int(amount) == 0:
         return ZERO
+
+    if int(amount) >= 10:
+        return OVER_TEN
 
     max_bid = art.bid_set.all().aggregate(Max('amount'))['amount__max']
     valid_len = len(amount.split('.')[0]) <= 4

@@ -40,6 +40,8 @@ def view_artwork(request, item_id):
             return redirect('view_artwork', item_id)
         elif valid == validation.ZERO:
             context['error_message'] = 'Your bid can\'t be $0.00'
+        elif valid == validation.OVER_TEN:
+            context['error_message'] = 'You can\'t bid more than $10.00 at a time'
         elif valid == validation.LOW_BID:
             context['error_message'] = 'Your bid must be at least $1 greater than the current highest bid'
         elif valid == validation.INVALID:
