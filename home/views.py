@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Max
 from .models import Artwork, Bid
 from . import validation
+import datetime
 
 # Create your views here.
 def list_artwork(request):
@@ -27,6 +28,9 @@ def view_artwork(request, item_id):
     context['bidders'] = Bid.objects.all().filter(artwork__id=item_id).order_by('-amount')
 
     if request.method == 'POST':
+
+        if context['item'].is_expired:
+            return redirect('view_artwork', item_id)
 
         name = request.POST['name']
         email = request.POST['email']

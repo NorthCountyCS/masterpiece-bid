@@ -13,6 +13,11 @@
     .row img {
         width: 100%;
     }
+
+    .expired {
+        color: #777;
+        font-size: 12px;
+    }
 {% endblock %}
 
 {% block content %}
@@ -31,7 +36,12 @@
                         <div class="caption">
                             <h3>{{ art }}</h3>
                             <h4>{{ art.artist }}</h4>
-                            <p>{{ bid }}</p>
+                            <p>
+                                {{ bid }}
+                                {% if art.is_expired %}
+                                    <span class="expired">Expired</span>
+                                {% endif %}
+                            </p>
                             <p><a href="{% url 'view_artwork' art.id %}" class="btn btn-primary" role="button">View Artwork</a></p>
                         </div>
                     </div>

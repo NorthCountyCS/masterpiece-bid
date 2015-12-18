@@ -12,6 +12,11 @@
     .pictures img {
         width: 100%;
     }
+
+    .expired {
+        color: #777;
+        font-size: 12px;
+    }
 {% endblock %}
 
 {% block content %}
@@ -41,15 +46,29 @@
                 <div class="input-group-addon">.00</div>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-success" value="Bid"/>
+                {% if item.is_expired %}
+                    <input type="submit" class="btn btn-success disabled" value="Bid" />
+                {% else %}
+                    <input type="submit" class="btn btn-success" value="Bid" />
+                {% endif %}
             </div>
         </form>
 
         <hr/>
 
         <p>
-            Started: {{ item.pub_date }}<br/>
-            Ends: {{ item.end_date }}
+            <div>
+                Started: {{ item.pub_date }}
+            </div>
+            <div>
+                Ends: {{ item.end_date }}
+                {% if item.is_expired %}
+                    
+                    <span class="expired">
+                        Expired
+                    </span>
+                {% endif %}
+            </div>
         </p>
         <hr/>
         <p>
