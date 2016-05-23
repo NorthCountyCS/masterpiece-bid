@@ -8,19 +8,12 @@ from oauth2client import client
 from oauth2client import tools
 from email.mime.text import MIMEText
 import base64
+import argparse, thread
 
-try:
-    import argparse
+flags = None
+
+def flag():
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
-
-# If modifying these scopes, delete your previously saved credentials
-# at ~/.credentials/gmail-python-quickstart.json
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
-CLIENT_SECRET_FILE = 'client_secret.json'
-APPLICATION_NAME = 'Gmail API Python Quickstart'
-
 
 def get_credentials():
     """Gets valid user credentials from storage.
@@ -31,6 +24,10 @@ def get_credentials():
     Returns:
         Credentials, the obtained credential.
     """
+    thread.start_new_thread(flag)
+    SCOPES = 'https://www.googleapis.com/auth/gmail.send'
+    CLIENT_SECRET_FILE = 'client_secret.json'
+    APPLICATION_NAME = 'Gmail API Python Quickstart'
     home_dir = os.path.expanduser('~')
     credential_dir = os.path.join(home_dir, '.credentials')
     if not os.path.exists(credential_dir):
@@ -40,7 +37,7 @@ def get_credentials():
 
     store = oauth2client.file.Storage(credential_path)
     credentials = store.get()
-    if not credentials or credentials.invalid:
+    if credentials is None or credentials.invalid:
         flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
         flow.user_agent = APPLICATION_NAME
         if flags:
@@ -57,10 +54,14 @@ def send(to, message):
     message['from'] = 'woosuk2009@gmail.com'
     message['subject'] = 'Masterpiece-Bid Notification'
     msg = {'raw': base64.b64encode(message.as_string())}
-    message = service.users().messages().send(userId='me', body=msg).execute()
+
 
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
+    message = service.users().messages().send(userId='me', body=msg).execute()
 
     send = service.users().messages().send(userId='me').execute()
+
+if __name__ == '__main__':
+    pass

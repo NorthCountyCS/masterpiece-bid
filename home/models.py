@@ -7,8 +7,7 @@ class Artwork(models.Model):
     artist = models.CharField(max_length=32, default='Anonymous')
     image = models.ImageField(upload_to='static/images')
     original_image = models.ImageField(upload_to='static/images', blank=True)
-    pub_date = models.DateField('date published', auto_now_add=True)
-    end_date = models.DateTimeField('end date')
+    end_date = models.DateTimeField('end date(UTC)', default=datetime.now, blank=False)
 
     @property
     def is_expired(self):
