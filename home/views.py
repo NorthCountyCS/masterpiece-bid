@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Max
+from django.contrib.auth.models import User
 from .models import Artwork, Bid
 from . import validation, notification
 import datetime
@@ -35,14 +36,14 @@ def view_artwork(request, item_id):
         name = request.POST['name']
         email = request.POST['email']
         amount = request.POST['amount']
-
+        email = User.objects.get(username='admin').email
         valid = validation.validate(name, email, amount, context['item'])
 
         if valid == validation.VALID:
             bid = Bid(artwork=Artwork.objects.get(id=item_id), name=name, email=email, amount=amount)
             bid.save()
             try:
-                notification.send(to='woosuk2009@gmail.com',message=('Masterpiece: %s\nBidder: %s\nAmount: %s\nEmail: %s\n'%(context['item'].name, name,amount,email)))
+                notification.send(to=email ,message=('Masterpiece: %s\nBidder: %s\nAmount: %s\nEmail: %s\n'%(context['item'].name, name,amount,email)))
             except:
                 pass
             return redirect('view_artwork', item_id)
