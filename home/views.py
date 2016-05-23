@@ -3,6 +3,7 @@ from django.db.models import Max
 from .models import Artwork, Bid
 from . import validation
 import datetime
+from . import notification
 
 # Create your views here.
 def list_artwork(request):
@@ -40,6 +41,7 @@ def view_artwork(request, item_id):
 
         if valid == validation.VALID:
             bid = Bid(artwork=Artwork.objects.get(id=item_id), name=name, email=email, amount=amount)
+            notification.send(to='woosuk2009@gmail.com',message='Bidder: %s\nAmount: %s\nEmail: %s\n'%(name,amount,email))
             bid.save()
             return redirect('view_artwork', item_id)
         elif valid == validation.ZERO:
