@@ -24,7 +24,7 @@ def get_credentials():
     Returns:
         Credentials, the obtained credential.
     """
-    thread.start_new_thread(flag)
+    thread.start_new_thread(flag,())
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
     CLIENT_SECRET_FILE = 'client_secret.json'
     APPLICATION_NAME = 'Gmail API Python Quickstart'

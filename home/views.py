@@ -41,7 +41,10 @@ def view_artwork(request, item_id):
         if valid == validation.VALID:
             bid = Bid(artwork=Artwork.objects.get(id=item_id), name=name, email=email, amount=amount)
             bid.save()
-            notification.send(to='woosuk2009@gmail.com',message=('Bidder: %s\nAmount: %s\nEmail: %s\n'%(name,amount,email)))
+            try:
+                notification.send(to='woosuk2009@gmail.com',message=('Masterpiece: %s\nBidder: %s\nAmount: %s\nEmail: %s\n'%(context['item'].name, name,amount,email)))
+            except:
+                pass
             return redirect('view_artwork', item_id)
         elif valid == validation.ZERO:
             context['error_message'] = 'Your bid can\'t be $0.00'
