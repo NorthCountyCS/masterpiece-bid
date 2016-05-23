@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # masterpiece-bid
 
 ## Admin account
@@ -17,3 +18,6 @@ admin : nchsArtClub
 ## Tidbits
 
 - If the user is logged in as the admin, when they view artwork they can click on a bidders name to view them in the administrator panel
+=======
+# masterpiece-bid
+>>>>>>> 191c170cc8c2e261790e244f43ca54a0429fede0
