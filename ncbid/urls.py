@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from home.views import list_artwork, view_artwork
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'home.views.list_artwork', name='list_artwork'),
-    url(r'^(?P<item_id>\d+)$', 'home.views.view_artwork', name='view_artwork'),
+    url(r'^$', list_artwork, name='list_artwork'),
+    url(r'^(?P<item_id>\d+)$', view_artwork, name='view_artwork'),
 ]
