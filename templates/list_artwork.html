@@ -1,38 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}
     Listing
 {% endblock %}
 
 {% block css %}
-    .hide-top {
-        margin-top: -5px;
-    }
-
-    .row img {
-        width: 100%;
-    }
-
     .expired {
         color: #777;
         font-size: 12px;
+    }
+    .spaced {
+        margin-top: 20px;
     }
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        <h1>Listing</h1>
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Listing</h2>
+        </div>
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-2">
+          <img src="{% static 'images/christmas.png' %}" height="76"/>
+        </div>
+      </div>
+      <div class="spaced">
         {% for art, bid in pkg %}
             {% if forloop.counter|divisibleby:3 or forloop.counter0 == 0 %}
                 <div class="row"><!-- start -->
             {% endif %}
                 <div class="col-sm-4 col-md-4">
                     <div class="thumbnail">
-                        <div class="row hide-top">
-                            <img src="{{ art.image }}" class="img-responsive" />
-                            <img src="{{ art.original_image }}" class="img-responsive" />
-                        </div>
+                        <img src="{{ art.image }}" class="img-responsive" />
+                        <img src="{{ art.original_image }}" class="img-responsive" />
                         <div class="caption">
                             <h3>{{ art }}</h3>
                             <h4>{{ art.artist }}</h4>
@@ -50,5 +52,6 @@
                 </div><!-- end -->
             {% endif %}
         {% endfor %}
+      </div>
     </div>
 {% endblock %}
