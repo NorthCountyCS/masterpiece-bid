@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Max
 from django.contrib.auth.models import User
 from .models import Artwork, Bid
-from . import validation, notification
+from . import validation
 import datetime
 
 # Create your views here.
