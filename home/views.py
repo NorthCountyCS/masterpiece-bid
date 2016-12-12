@@ -36,7 +36,6 @@ def view_artwork(request, item_id):
         name = request.POST['name']
         email = request.POST['email']
         amount = request.POST['amount']
-        email = User.objects.get(username='admin').email
         valid = validation.validate(name, email, amount, context['item'])
 
         if valid == validation.VALID:
