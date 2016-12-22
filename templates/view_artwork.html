@@ -71,9 +71,9 @@
         <p>
             {% for bidder in bidders %}
                 {% if request.user.is_superuser %}
-                    <a href="{% url 'admin:home_bid_change' bidder.id %}">{{ bidder }}</a> bidded ${{ bidder.amount }}<br/>
+                    <a href="{% url 'admin:home_bid_change' bidder.id %}">{{ bidder }}</a> bid ${{ bidder.amount }}<br/>
                 {% else %}
-                    {{ bidder }} bidded ${{ bidder.amount }}<br/>
+                    {{ bidder }} bid ${{ bidder.amount }}<br/>
                 {% endif %}
             {% endfor %}
         </p>
