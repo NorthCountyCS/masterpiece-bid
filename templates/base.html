@@ -44,10 +44,10 @@
         {% block css %}{% endblock %}
     </style>
 </head>
-<body background="{% static 'theme/bg.jpg' %}">
+<body>
     <div class="container">
       <div class="header">
-        <h1 class="text-muted"><a href="{% url 'list_artwork' %}" class="header-home">Mini Masterpiece Bid</a> - auction ends at 6:30pm on Dec 14th, 2016</h1>
+        <h1 class="text-muted"><a href="{% url 'list_artwork' %}" class="header-home">Title</a> - Memo</h1>
       </div>
 
         {% if error_message %}
@@ -56,7 +56,6 @@
     </div>
 
     {% block content %}{% endblock %}
-    <script src="{% static 'js/snowstorm-min.js' %}"></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% block js %}{% endblock %}
