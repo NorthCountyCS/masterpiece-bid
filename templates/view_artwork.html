@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block css %}
+    h1, p {
+	color: #fff;
+    }	
     .pictures {
         margin-bottom: 20px;
     }
@@ -14,22 +17,23 @@
     }
 
     .expired {
-        color: #777;
+        color: #fff;
         font-size: 12px;
     }
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        <h1>{{ item }} <small>{{ item.artist }}</small></h1>
+        <h1>{{ item }} <small> by {{ item.artist }}</small></h1>
 
         <div class="row pictures">
-            <div class="col-sm-6 col-md-6">
-                <img src="{{ item.image }}" alt="Image" class="img-responsive img-thumbnail">
-            </div>
-            <div class="col-sm-6 col-md-6">
-                <img src="{{ item.original_image }}" alt="Original Image" class="img-responsive img-thumbnail">
-            </div>
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-6">
+                	<img src="{{ item.image }}" alt="Image" class="img-responsive img-thumbnail">
+		</div>
+		<div class="col-md-3">
+		</div>
         </div>
 
         {% if not item.is_expired %}
