@@ -16,7 +16,7 @@ def list_artwork(request, query):
     auction = Auction.objects.filter(name=query)
 
     if not auction:
-        redirect(request, 'list_auction')
+        redirect('list_auction')
     auction = auction.get(name=query)
     context['auction'] = auction
     artwork = Product.objects.filter(auction=auction)
