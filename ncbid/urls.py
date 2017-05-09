@@ -18,7 +18,7 @@ from django.contrib import admin
 from home.views import list_artwork, view_artwork, list_auction
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin1/', include(admin.site.urls)),
     url(r'^$', list_auction, name='list_auction'),
     url(r'^([A-Za-z\s]+)$', list_artwork, name='list_artwork'),
     url(r'^(?P<item_id>\d+)$', view_artwork, name='view_artwork'),
