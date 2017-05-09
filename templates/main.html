@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Auctions
+{% endblock %}
+
+{% block css %}
+  .spaced{
+    margin-top:10px;
+  }
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <div class="row spaced">
+        <div class="col-sm-6 col-md-6">
+          <div class="jumbotron">
+            <h1>Welcome to NCBID!</h1>
+            <p>To the right is the list of currently held auctions.</p>
+            <p>If you have any questions, please to contact Mr.Serota or the auction holder accordingly.</p>
+            <p>Happy Bidding!</p>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+          <h2>Live Auctions:</h2>
+          <hr/>
+          {% if auctions %}
+            {% for auction in auctions %}
+            <div class="alert alert-success">
+              <h4> <a href="{% url 'list_artwork' auction.name %}">{{ auction.name }}</a> </h4>
+              <p>{{ auction.description }}</p>
+              <p>Holder: {{ auction.teacher }}</p>
+            </div>
+            {% endfor %}
+          {% else %}
+            <p>There are no auctions at this time</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+{% endblock %}

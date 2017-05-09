@@ -6,20 +6,25 @@
     <!-- Jackson Lim -->
     <!-- No Copyright (c) 2015 -->
     <meta charset="UTF-8">
-    <title>Lantern Project &middot;{% block title %}{% endblock %}</title>
+    <title>NCBID &middot;{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
 
     <style>
         html {
             height: 100%
         }
-        body {
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            padding-top: 20px;
-            padding-bottom: 20px;
+        .signature
+        {
+           font-size: 10px;
+           line-height: 13px;
+           color: rgb(193,193,193);
+           text-align: right;
+           float: right;
         }
-
+        .footer
+        {
+           padding-right: 20px;
+        }
         .header {
             border-bottom: 1px solid #e5e5e5;
         }
@@ -49,10 +54,10 @@
         {% block css %}{% endblock %}
     </style>
 </head>
-<body background="{% static 'theme/lantern-project.jpg' %}">
+<body>
     <div class="container">
       <div class="header">
-        <h1 class="text-muted"><a href="{% url 'list_artwork' %}" class="header-home">Lantern Project</a></h1>
+        <h1 class="text-muted">North County Bidding Internal Directory</h1>
       </div>
 
         {% if error_message %}
@@ -61,6 +66,12 @@
     </div>
 
     {% block content %}{% endblock %}
+
+    <hr>
+    <div class="footer col-md-offset-5">
+        <p class="signature">NCBID&copy<br/>Jackson Lim<br/>https://www.github.com/Xerxous</p>
+    </div>
+
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% block js %}{% endblock %}

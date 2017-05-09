@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block css %}
+    body {
+        background-color: #{{ auction.background_color }};
+    }
     .expired {
         color: #777;
         font-size: 12px;
@@ -16,7 +19,7 @@
 
 {% block content %}
     <div class="container">
-      <h2>Listing</h2>
+      <h2>{{ auction.name }}</h2>
       <div class="spaced">
         {% for art, bid in pkg %}
             {% if forloop.counter|divisibleby:3 or forloop.counter0 == 0 %}

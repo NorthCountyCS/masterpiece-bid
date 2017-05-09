@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block css %}
+    body {
+        background-color: #{{ auction.background_color }};
+    }
     .pictures {
         margin-bottom: 20px;
     }
@@ -21,15 +24,23 @@
 
 {% block content %}
     <div class="container">
-        <h1>{{ item }} <small>{{ item.artist }}</small></h1>
+        <h1>{{ item }} <small>By {{ item.artist }}</small></h1>
 
         <div class="row pictures">
+          {% if item.original_image %}
             <div class="col-sm-6 col-md-6">
                 <img src="{{ item.image }}" alt="Image" class="img-responsive img-thumbnail">
             </div>
             <div class="col-sm-6 col-md-6">
                 <img src="{{ item.original_image }}" alt="Original Image" class="img-responsive img-thumbnail">
             </div>
+          {% else %}
+            <div class="col-sm-3 col-md-3"></div>
+            <div class="col-sm-6 col-md-6">
+                <img src="{{ item.image }}" alt="Image" class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-sm-3 col-md-3"></div>
+          {% endif %}
         </div>
 
         {% if not item.is_expired %}
