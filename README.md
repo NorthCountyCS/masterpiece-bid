@@ -22,6 +22,7 @@ sudo apt-get install postgresql
 2. Create a database called "nchsauction":
 
   `createdb nchsauction`
+
 3. Run `psql` on the database "nchsauction" and create a user:
   ```PosgreSQL
   psql -d nchsauction
@@ -59,3 +60,6 @@ sudo apt-get install postgresql
 6. Now you can migrate PostgreSQL in Django:
 
   `python manage.py migrate`
+
+Run with when Debug = False
+`sudo python manage.py runserver 0.0.0.0:80 --insecure`
