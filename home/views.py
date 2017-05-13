@@ -39,7 +39,7 @@ def view_artwork(request, item_id):
     context['auction'] = Auction.objects.get(name=product.auction.name)
     if request.method == 'POST':
 
-        if context['item'].is_expired:
+        if context['auction'].is_expired:
             return redirect('view_artwork', item_id)
 
         name = request.POST['name']
@@ -50,10 +50,6 @@ def view_artwork(request, item_id):
         if valid == validation.VALID:
             bid = Bid(artwork=Product.objects.get(id=item_id), name=name, email=email, amount=amount)
             bid.save()
-            try:
-                notification.send(to=email ,message=('Masterpiece: %s\nBidder: %s\nAmount: %s\nEmail: %s\n'%(context['item'].name, name,amount,email)))
-            except:
-                pass
             return redirect('view_artwork', item_id)
         elif valid == validation.ZERO:
             context['error_message'] = 'Your bid can\'t be $0.00'

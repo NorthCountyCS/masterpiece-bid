@@ -8,11 +8,13 @@ class Bid(admin.ModelAdmin):
 
 @admin.register(Product)
 class Product(admin.ModelAdmin):
-    list_display = ['name', 'end_date', 'artwork_url']
+    list_display = ['name', 'artwork_url']
 
     def artwork_url(self, obj):
         return '<a href="%s">%s</a>' % ('/' + str(obj.id), 'Click here to view')
     artwork_url.allow_tags = True
     artwork_url.short_description = 'Product URL'
 
-admin.site.register(Auction)
+@admin.register(Auction)
+class Auction(admin.ModelAdmin):
+    list_display = ['name', 'end_date', 'teacher', 'description']

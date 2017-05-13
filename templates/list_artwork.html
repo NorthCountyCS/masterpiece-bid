@@ -34,7 +34,7 @@
                             <h4>{{ art.artist }}</h4>
                             <p>
                                 {{ bid }}
-                                {% if art.is_expired %}
+                                {% if auction.is_expired %}
                                     <span class="expired">Expired</span>
                                 {% endif %}
                             </p>

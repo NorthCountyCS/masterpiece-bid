@@ -43,7 +43,7 @@
           {% endif %}
         </div>
 
-        {% if not item.is_expired %}
+        {% if not auction.is_expired %}
         <form class="form-inline" name="bid" method="post" action="{% url 'view_artwork' item_id %}">
             {% csrf_token %}
             <div class="form-group">
@@ -70,7 +70,7 @@
             </div>
             <div>
                 Ends: {{ item.end_date }} -->
-                {% if item.is_expired %}
+                {% if auction.is_expired %}
 
                     <span class="expired">
                         This item is expired
